@@ -1,0 +1,47 @@
+{
+  "name": "angular-fundamentals-seed",
+  "version": "0.1.0",
+  "description": "Ultimate Angular: Angular Fundamentals Seed",
+  "repository": {
+    "url": "git@github.com:UltimateAngular/angular-fundamentals-seed.git",
+    "type": "git"
+  },
+  "license": "MIT",
+  "author": "Ultimate Angular",
+  "dependencies": {
+    "@angular/common": "7.2.15",
+    "@angular/compiler": "7.2.15",
+    "@angular/core": "7.2.15",
+    "@angular/forms": "7.2.15",
+    "@angular/http": "7.2.15",
+    "@angular/platform-browser": "7.2.15",
+    "@angular/platform-browser-dynamic": "7.2.15",
+    "@angular/router": "7.2.15",
+    "npm-install-peers": "^1.2.1",
+    "reflect-metadata": "0.1.13",
+    "rxjs": "6.5.3",
+    "ts-helpers": "1.1.2",
+    "webpack-cli": "^3.3.10",
+    "zone.js": "^0.8.26",
+    "@types/core-js": "2.5.2",
+    "@types/node": "12.12.21",
+    "angular2-template-loader": "0.6.2",
+    "awesome-typescript-loader": "5.2.1",
+    "chalk": "1.1.3",
+    "core-js": "3.6.0",
+    "json-server": "0.15.1",
+    "node-sass": "^4.13.0",
+    "progress-bar-webpack-plugin": "1.12.1",
+    "raw-loader": "0.5.1",
+    "resolve-url-loader": "1.6.0",
+    "sass-loader": "^8.0.0",
+    "typescript": "3.7.2",
+    "webpack": "^4.41.4",
+    "webpack-dev-server": "3.9.0"
+  },
+  "scripts": {
+    "prestart": "webpack --config vendor/webpack.config.js",
+    "start": "webpack-dev-server"
+  },
+  "devDependencies": {}
+}
