@@ -7,6 +7,10 @@ import { SellDashboardComponent } from "./containers/sell-dashboard/sell-dashboa
 import { SellItemDetailComponent } from "./generic-components/selling-item-detail/selling-item-detail.component";
 import { SellItemSumComponent } from "./generic-components/selling-items-sum/selling-item-sum.component";
 
+//providers
+
+import { ItemDashboardService } from "./sell-dashboard.service";
+
 @NgModule({
   declarations: [
     SellDashboardComponent,
@@ -14,6 +18,7 @@ import { SellItemSumComponent } from "./generic-components/selling-items-sum/sel
     SellItemSumComponent
   ],
   imports: [CommonModule],
-  exports: [SellDashboardComponent] // here export only the dashboard component, because we are using the Detail and Sum component inside the Dashboard
+  exports: [SellDashboardComponent], // here export only the dashboard component, because we are using the Detail and Sum component inside the Dashboard
+  providers: [ItemDashboardService]
 })
 export class SellDashboardModule {}

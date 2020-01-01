@@ -5,6 +5,7 @@ import { SellDashboardModule } from "./sell-dashboard/sell-dashboard.module";
 import { AngularBasicsModule } from "./angular-basics/angular-basics.module";
 
 import { AppComponent } from "./app.component";
+import { HttpClientModule } from "@angular/common/http";
 
 @NgModule({
   imports: [
@@ -12,7 +13,8 @@ import { AppComponent } from "./app.component";
     BrowserModule,
     //custom modules
     SellDashboardModule,
-    AngularBasicsModule
+    AngularBasicsModule,
+    HttpClientModule
   ],
   bootstrap: [AppComponent],
   declarations: [AppComponent]
