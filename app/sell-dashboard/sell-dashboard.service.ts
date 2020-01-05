@@ -1,8 +1,10 @@
 import { Item } from "./item.interface";
 import { Injectable } from "@angular/core";
-import { HttpClient } from "@angular/common/http";
+import { HttpClient, HttpErrorResponse } from "@angular/common/http";
 import { Observable } from "rxjs";
 //import { map } from "rxjs/operators";
+import { catchError } from "rxjs/operators";
+import { throwError } from "rxjs";
 
 //const ITEMS_API: string = "api/items";
 
@@ -39,7 +41,40 @@ export class ItemDashboardService {
   }
 
   getItemsAsyn(): Observable<Item[]> {
-    //return this.http.get(this.ITEMS_API).pipe(map(item => item.json() || []));
     return this.http.get<Item[]>(this.ITEMS_API);
+  }
+
+  updateItemsAsyn(item: Item): Observable<any> {
+    //aus irgendeinem Grund die PUT-Request funktioniert nicht - 404 not found
+    return this.http
+      .put<Item>(`${this.ITEMS_API}?code=${item.code}`, item, {
+        responseType: "json"
+      })
+      .pipe(
+        catchError(err =>
+          throwError(
+            new Error(
+              "Ein Fehler beim Speichern eines Items ist aufgetreten: " + err
+            )
+          )
+        )
+      );
+  }
+
+  deleteItemsAsyn(item: Item): Observable<any> {
+    //aus irgendeinem Grund die DELETE-Request funktioniert nicht - 404 not found
+    return this.http
+      .delete<Item>(`${this.ITEMS_API}?code=${item.code}`, {
+        responseType: "json"
+      })
+      .pipe(
+        catchError(err =>
+          throwError(
+            new Error(
+              "Ein Fehler beim Speichern eines Items ist aufgetreten: " + err
+            )
+          )
+        )
+      );
   }
 }

@@ -88,3 +88,11 @@ h4 {
 .coupe {
   color: blue;
 }
+
+.nav {
+  border-bottom: 1px solid grey;
+}
+.nav a {
+  margin: 10px;
+  padding: 20px;
+}

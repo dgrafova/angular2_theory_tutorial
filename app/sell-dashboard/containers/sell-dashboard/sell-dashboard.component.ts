@@ -71,19 +71,39 @@ export class SellDashboardComponent implements OnInit {
   }
 
   handleEdit(event: Item) {
-    this.items = this.items.map((item: Item) => {
-      if (item.code === event.code) {
-        //immutable state changes/ immutable operation assign
-        //new old and new changes will be merged
-        item = Object.assign({}, item, event);
-      }
-      return item;
+    //edit-Data example for a static data
+    //this.items = this.items.map((item: Item) => {
+    //  if (item.code === event.code) {
+    //immutable state changes (immutable operation) assign
+    //old and new changes will be merged
+    //    item = Object.assign({}, item, event);
+    //  }
+    //  return item;
+    //});
+
+    //edit-Data example for asynchronous Data
+    this.itemService.updateItemsAsyn(event).subscribe((data: Item) => {
+      this.items = this.items.map((item: Item) => {
+        if (item.code === event.code) {
+          item = Object.assign({}, item, event);
+        }
+        return item;
+      });
     });
   }
 
   handleRemove(event: Item) {
-    this.items = this.items.filter((item: Item) => {
-      return item.brand !== event.brand;
+    //delete-Data example for a static data
+    //  this.items = this.items.filter((item: Item) => {
+    //    return item.brand !== event.brand;
+    //  });
+    //}
+
+    //asynchronous data
+    this.itemService.deleteItemsAsyn(event).subscribe((data: Item[]) => {
+      this.items = this.items.filter((item: Item) => {
+        return item.brand !== event.brand;
+      });
     });
   }
 }
