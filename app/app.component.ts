@@ -32,7 +32,8 @@ export class AppComponent {
     { link: "/oops", name: "Not Found", exact: false },
     { link: "/property-binding", name: "Basics 1", exact: true },
     { link: "/template-elements", name: "Basics 2", exact: true },
-    { link: "/sell-dashboard", name: "Selling Dashboard", exact: true }
+    { link: "/sell-dashboard", name: "Selling Dashboard", exact: true },
+    { link: "/item-viewer", name: "Item Viewer", exact: true }
   ];
 
   constructor() {}

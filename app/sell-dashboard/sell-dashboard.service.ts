@@ -1,4 +1,4 @@
-import { Item } from "./item.interface";
+import { Item, Color } from "./item.interface";
 import { Injectable } from "@angular/core";
 import { HttpClient, HttpErrorResponse } from "@angular/common/http";
 import { Observable } from "rxjs";
@@ -17,25 +17,31 @@ export class ItemDashboardService {
   getItemsSyn(): Item[] {
     return [
       {
+        id: 1,
         code: "W12320000002",
         category: "cloths",
         gender: "women",
         brand: "GANT",
-        size: "M"
+        size: "M",
+        color: [Color.black, Color.white]
       },
       {
+        id: 2,
         code: "M1120000008",
         category: "shoes",
         gender: "men",
         brand: "LLOYD",
-        size: 46
+        size: 46,
+        color: null
       },
       {
+        id: 3,
         code: "W3230000009",
         category: "cloths",
         gender: "women",
         brand: "Tommy Hilfiger",
-        size: "S"
+        size: "S",
+        color: [Color.white, Color.red]
       }
     ];
   }
@@ -44,10 +50,14 @@ export class ItemDashboardService {
     return this.http.get<Item[]>(this.ITEMS_API);
   }
 
+  getItem(id: number): Observable<Item> {
+    return this.http.get<Item>(`${this.ITEMS_API}/${id}`);
+  }
+
   updateItemsAsyn(item: Item): Observable<any> {
     //aus irgendeinem Grund die PUT-Request funktioniert nicht - 404 not found
     return this.http
-      .put<Item>(`${this.ITEMS_API}?code=${item.code}`, item, {
+      .put<Item>(`${this.ITEMS_API}/${item.id}`, item, {
         responseType: "json"
       })
       .pipe(
@@ -64,7 +74,7 @@ export class ItemDashboardService {
   deleteItemsAsyn(item: Item): Observable<any> {
     //aus irgendeinem Grund die DELETE-Request funktioniert nicht - 404 not found
     return this.http
-      .delete<Item>(`${this.ITEMS_API}?code=${item.code}`, {
+      .delete<Item>(`${this.ITEMS_API}/${item.id}`, {
         responseType: "json"
       })
       .pipe(

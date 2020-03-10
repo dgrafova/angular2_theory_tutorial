@@ -1,31 +1,37 @@
 import { Component, OnInit, IterableDiffers } from "@angular/core";
 
-import { Item } from "../../item.interface";
+import { Item, Color } from "../../item.interface";
 
 import { ItemDashboardService } from "../../sell-dashboard.service";
 
 //static data
 const staticItems: Item[] = [
   {
+    id: 1,
     code: "W12320000002",
     category: "cloths",
     gender: "women",
     brand: "GANT",
-    size: "M"
+    size: "M",
+    color: [Color.black, Color.white]
   },
   {
+    id: 2,
     code: "M1120000008",
     category: "shoes",
     gender: "men",
     brand: "LLOYD",
-    size: 46
+    size: 46,
+    color: null
   },
   {
+    id: 3,
     code: "W3230000009",
     category: "cloths",
     gender: "women",
     brand: "Tommy Hilfiger",
-    size: "S"
+    size: "S",
+    color: [Color.white, Color.red]
   }
 ];
 
@@ -84,7 +90,7 @@ export class SellDashboardComponent implements OnInit {
     //edit-Data example for asynchronous Data
     this.itemService.updateItemsAsyn(event).subscribe((data: Item) => {
       this.items = this.items.map((item: Item) => {
-        if (item.code === event.code) {
+        if (item.id === event.id) {
           item = Object.assign({}, item, event);
         }
         return item;

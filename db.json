@@ -1,25 +1,37 @@
 {
   "items": [
     {
+      "id": 1,
       "code": "W12320000002",
       "category": "cloths",
       "gender": "women",
       "brand": "GANT",
-      "size": "M"
+      "size": "M",
+      "color": [
+        "BLACK",
+        "RED"
+      ]
     },
     {
+      "id": 2,
       "code": "M1120000008",
       "category": "shoes",
       "gender": "men",
       "brand": "LLOYD",
-      "size": 46
+      "size": 46,
+      "color": null
     },
     {
+      "id": 3,
       "code": "W3230000009",
       "category": "cloths",
       "gender": "women",
       "brand": "Tommy Hilfiger",
-      "size": "S"
+      "size": "S",
+      "color": [
+        "WHITE",
+        "RED"
+      ]
     }
   ]
 }
