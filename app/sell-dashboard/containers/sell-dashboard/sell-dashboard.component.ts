@@ -3,6 +3,7 @@ import { Component, OnInit, IterableDiffers } from "@angular/core";
 import { Item, Color } from "../../item.interface";
 
 import { ItemDashboardService } from "../../sell-dashboard.service";
+import { Router } from "@angular/router";
 
 //static data
 const staticItems: Item[] = [
@@ -47,6 +48,7 @@ const staticItems: Item[] = [
       [detail]="item"
       (edit)="handleEdit($event)"
       (remove)="handleRemove($event)"
+      (view)="handleView($event)"
     ></selling-item-detail>
     <h2>Item Sum Component</h2>
     <selling-item-sum [items]="items"></selling-item-sum>
@@ -55,7 +57,10 @@ const staticItems: Item[] = [
 export class SellDashboardComponent implements OnInit {
   items: Item[];
 
-  constructor(private itemService: ItemDashboardService) {
+  constructor(
+    private itemService: ItemDashboardService,
+    private router: Router
+  ) {
     //when we are injecting depedences in the constructor, angular does the rest like "this.itemService = ItemDashboardService;"
   }
 
@@ -111,5 +116,9 @@ export class SellDashboardComponent implements OnInit {
         return item.brand !== event.brand;
       });
     });
+  }
+
+  handleView(event: Item) {
+    this.router.navigate(["/item-viewer", event.id]);
   }
 }

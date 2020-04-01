@@ -12,6 +12,8 @@ import { HttpClientModule } from "@angular/common/http";
 
 const ROUTES: Routes = [
   { path: "", component: HomeComponent, pathMatch: "full" },
+  //Redirect from home to sell-dashboard
+  //{ path: "", redirectTo: "sell-dashboard", pathMatch: "full" },
   { path: "**", component: NotFoundComponent, pathMatch: "full" }
 ];
 

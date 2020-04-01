@@ -12,7 +12,10 @@ import { ObservableInput } from "rxjs";
   selector: "item-viewer",
   template: `
     <p>Item detail: {{ item | json }}</p>
-    <item-form [detail]="item"></item-form>
+    <button (click)="goBack()">
+      Go back
+    </button>
+    <item-form [detail]="item" (update)="onUpdateItem($event)"></item-form>
   `
 })
 export class ItemViewerComponent implements OnInit {
@@ -33,5 +36,15 @@ export class ItemViewerComponent implements OnInit {
       this.item = data;
       console.log("Loading item data form Item-Viewer Component");
     });*/
+  }
+
+  goBack() {
+    this.router.navigate(["/sell-dashboard"]);
+  }
+
+  onUpdateItem(event: Item) {
+    this.itemService.updateItemsAsyn(event).subscribe((data: Item) => {
+      this.item = Object.assign({}, this.item, event);
+    });
   }
 }

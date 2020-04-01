@@ -1,12 +1,17 @@
-import { Component, Input, OnInit } from "@angular/core";
+import { Component, Input, OnInit, Output } from "@angular/core";
 import { Item } from "../../item.interface";
 import { Category } from "../../category.interface";
 import { NgForm } from "@angular/forms";
+import { EventEmitter } from "@angular/core";
 
 @Component({
   selector: "item-form",
   template: `
-    <form #form="ngForm" novalidate>
+    <form
+      (ngSubmit)="handleSubmit(form.value, form.valid)"
+      #form="ngForm"
+      novalidate
+    >
       <!-- novalidate means we are going to use Angular's native validation  -->
       Form detail-data as json: {{ detail | json }}
       <div>
@@ -23,7 +28,17 @@ import { NgForm } from "@angular/forms";
       </div>
       <div>
         Item id:
-        <input type="number" name="id" [ngModel]="detail?.id" />
+        <input
+          type="number"
+          name="id"
+          [ngModel]="detail?.id"
+          required
+          #id="ngModel"
+        />
+        <div style="color:red">Id Field Validation:{{ id.errors | json }}</div>
+        <div style="color:red" *ngIf="id.errors?.required && id.dirty">
+          Id is required.
+        </div>
       </div>
       <div>Kollektion: {{ collection || "unknown" }}</div>
       <div>
@@ -78,12 +93,20 @@ import { NgForm } from "@angular/forms";
           <input type="checkbox" name="checked" [ngModel]="checked" />
         </label>
       </div>
+      <div style="color:red">Form valid:{{ form.valid | json }}</div>
+      <div style="color:red">Form invalid:{{ form.invalid | json }}</div>
+      <button type="submit" [disabled]="form.invalid">
+        Update
+      </button>
     </form>
   `
 })
 export class ItemFormComponent {
   @Input()
   detail: Item;
+
+  @Output()
+  update: EventEmitter<Item> = new EventEmitter<Item>();
 
   collection: string;
   checked: boolean = true;
@@ -100,5 +123,11 @@ export class ItemFormComponent {
   toggleGender(gender: "women" | "men"): void {
     if (gender === "women") this.collection = "Frauen 2020";
     else this.collection = "Herren 2020";
+  }
+
+  handleSubmit(item: Item, isValid: boolean) {
+    if (isValid) {
+      this.update.emit(item);
+    }
   }
 }

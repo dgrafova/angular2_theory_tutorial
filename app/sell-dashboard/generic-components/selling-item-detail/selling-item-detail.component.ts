@@ -16,6 +16,9 @@ import { EventEmitter } from "@angular/core";
       />
       <!-- alternatively (input)="onBrandChange(brandName.value) #brandName -->
 
+      <button type="button" (click)="viewItem()">
+        VIEW
+      </button>
       <button type="button" (click)="editItem()">
         {{ editing ? "DONE" : "EDIT" }}
       </button>
@@ -36,6 +39,9 @@ export class SellItemDetailComponent {
   @Output()
   edit: EventEmitter<Item> = new EventEmitter();
 
+  @Output()
+  view: EventEmitter<Item> = new EventEmitter();
+
   constructor() {}
 
   onBrandChange(brand: string): void {
@@ -51,5 +57,9 @@ export class SellItemDetailComponent {
       this.edit.emit(this.detail);
     }
     this.editing = !this.editing;
+  }
+
+  viewItem(): void {
+    this.view.emit(this.detail);
   }
 }
